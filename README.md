@@ -7,8 +7,9 @@ Coding challenge for Pressbooks, authored by Carlos Bucheli.
 > I like to keep my codebase neat and clean, thus, I usually remove
 > unnecessary comments and not-used classes and/or components.
 > In this case, I'm using one and only one endpoint to return a list
-> of items (i.e. books), therefore, not used stuff like service
-> providers are simply not included in this repo.
+> of items (i.e. books), therefore, not used stuff like the console
+> commands kernel and service providers are simply not included
+> in this repo.
 
 ### Implementation Requirements
 
@@ -44,3 +45,11 @@ Then restart your webserver, using `Services` on Windows, the console command ac
 ```sh
 sudo apachectl restart
 ```
+
+### To Do's
+
+The following items are some improvements that need to be completed (during the next hours):
+
+* Reduce the amount of if statements in the SearchController
+* Pass JSON data via Behat/PHPUnit
+* Create migrations
