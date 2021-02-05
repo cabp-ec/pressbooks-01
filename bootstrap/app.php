@@ -2,8 +2,14 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
+$envFileName = '.env';
+
+if (!isset($_SERVER['HTTP_HOST'])) {
+    $envFileName = 'test.env';
+}
+
 (new Laravel\Lumen\Bootstrap\LoadEnvironmentVariables(
-    dirname(__DIR__)
+    dirname(__DIR__), $envFileName
 ))->bootstrap();
 
 /* Create The Application */
@@ -21,11 +27,26 @@ $app->singleton(
     App\Exceptions\Handler::class
 );
 
-/* Register other singleton classes here (e.g. console kernel). */
+//$app->singleton(
+//    Illuminate\Contracts\Console\Kernel::class,
+//    App\Console\Kernel::class
+//);
 
-/* Register middleware classes here (e.g. auth) */
+$app->singleton(App\Services\GifSearch::class);
 
-/* Register service providers here (e.g. app, auth, events). */
+/* Register Middleware */
+// $app->middleware([
+//     App\Http\Middleware\ExampleMiddleware::class
+// ]);
+
+// $app->routeMiddleware([
+//     'auth' => App\Http\Middleware\Authenticate::class,
+// ]);
+
+/* Register Service Providers */
+// $app->register(App\Providers\AppServiceProvider::class);
+// $app->register(App\Providers\AuthServiceProvider::class);
+// $app->register(App\Providers\EventServiceProvider::class);
 
 /* Load Routes */
 $app->router->group([

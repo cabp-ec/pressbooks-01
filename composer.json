@@ -22,9 +22,12 @@
   ],
   "require": {
     "php": "^7.3|^8.0",
-    "laravel/lumen-framework": "5.8.0"
+    "laravel/lumen-framework": "5.8.0",
+    "vlucas/phpdotenv": "3.4"
   },
   "require-dev": {
+    "behat/behat": "^3.8",
+    "phpunit/phpunit": "^9.5"
   },
   "autoload": {
     "psr-4": {
@@ -32,6 +35,9 @@
     }
   },
   "autoload-dev": {
+    "classmap": [
+      "test/tests/"
+    ]
   },
   "scripts": {
   },

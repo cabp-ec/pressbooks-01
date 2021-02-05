@@ -1,0 +1,9 @@
+default:
+    autoload:
+        '': "%paths.base%/test/tests"
+    suites:
+        welcome:
+            paths:    [ "%paths.base%/test/features" ]
+            contexts: [ WelcomeContext ]
+            filters:
+                tags: "@welcome"
