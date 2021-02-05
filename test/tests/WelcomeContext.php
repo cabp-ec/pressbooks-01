@@ -7,7 +7,6 @@ class WelcomeContext extends TestContext
 {
     const URI_NOT_FUND = 'URI_NOT_FUND';
     const URI_SEARCH = 'URI_SEARCH';
-    const URI_TERMS_MOST_USED = 'URI_TERMS_MOST_USED';
 
     private $uriNotFound;
     private $httpResponse;

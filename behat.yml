@@ -11,3 +11,4 @@ default:
             paths:    [ "%paths.base%/test/features" ]
             contexts: [ SearchContext ]
             filters:
+                tags: "@search"
