@@ -1,3 +1,3 @@
-# Carlos Bucheli
+# Books API
 
-Coding challenge for Pressbooks.
+Coding challenge for Pressbooks, authored by Carlos Bucheli.
