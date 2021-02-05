@@ -2,4 +2,4 @@
 
 // Default
 $router->get('/', 'IndexController@index');
-$router->post('/search', 'SearchController@searchByTag');
+$router->get('/search', 'SearchController@index');

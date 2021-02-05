@@ -7,3 +7,7 @@ default:
             contexts: [ WelcomeContext ]
             filters:
                 tags: "@welcome"
+        search:
+            paths:    [ "%paths.base%/test/features" ]
+            contexts: [ SearchContext ]
+            filters:
