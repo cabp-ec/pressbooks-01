@@ -1,0 +1,37 @@
+{
+  "name": "cabp/pressbooks-01",
+  "description": "Coding challenge for Pressbooks.",
+  "keywords": [
+    "php",
+    "framework",
+    "laravel",
+    "lumen",
+    "Carlos",
+    "Bucheli",
+    "Pressbooks"
+  ],
+  "license": "proprietary",
+  "type": "project",
+  "authors": [
+    {
+      "name": "Carlos Bucheli",
+      "email": "cabp@carlos-bucheli.com",
+      "homepage": "http://www.carlos-bucheli.com",
+      "role": "Owner"
+    }
+  ],
+  "require": {
+    "php": ">=7.2.0"
+  },
+  "require-dev": {
+  },
+  "scripts": {
+  },
+  "config": {
+    "preferred-install": "dist",
+    "sort-packages": true,
+    "optimize-autoloader": true
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
