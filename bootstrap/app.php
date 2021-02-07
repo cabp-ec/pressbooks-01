@@ -27,26 +27,16 @@ $app->singleton(
     App\Exceptions\Handler::class
 );
 
-//$app->singleton(
-//    Illuminate\Contracts\Console\Kernel::class,
-//    App\Console\Kernel::class
-//);
+$app->singleton(
+    Illuminate\Contracts\Console\Kernel::class,
+    App\Console\Kernel::class
+);
 
-$app->singleton(App\Services\GifSearch::class);
+$app->singleton(App\Services\InputValidationService::class);
 
 /* Register Middleware */
-// $app->middleware([
-//     App\Http\Middleware\ExampleMiddleware::class
-// ]);
-
-// $app->routeMiddleware([
-//     'auth' => App\Http\Middleware\Authenticate::class,
-// ]);
 
 /* Register Service Providers */
-// $app->register(App\Providers\AppServiceProvider::class);
-// $app->register(App\Providers\AuthServiceProvider::class);
-// $app->register(App\Providers\EventServiceProvider::class);
 
 /* Load Routes */
 $app->router->group([

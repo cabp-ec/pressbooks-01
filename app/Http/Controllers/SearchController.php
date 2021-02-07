@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\InputValidationService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Psr\Log\LoggerInterface;
@@ -9,11 +10,18 @@ use Psr\Log\LoggerInterface;
 final class SearchController extends Controller
 {
     /**
+     * @var InputValidationService
+     */
+    private $inputValidation;
+
+    /**
      * SearchController constructor.
      * @param LoggerInterface $logger
+     * @param InputValidationService $inputValidation
      */
-    public function __construct(LoggerInterface $logger)
+    public function __construct(LoggerInterface $logger, InputValidationService $inputValidation)
     {
+        $this->inputValidation = $inputValidation;
         parent::__construct($logger);
     }
 
@@ -37,29 +45,28 @@ final class SearchController extends Controller
         try {
             $input = json_decode($request->getContent(), true);
             $perPage = $input['per_page'] ?? 10;
-            $page = $input['page'] ?? 1;
-            $search = $input['search'] ?? false;
-            $original = $input['is_original'] ?? false;
-            $subject = $input['subject'] ?? false;
-
-            // TODO: reduce the amount of if statements and 'move' through pages
             $query = DB::table('book');
 
-            if ($search !== false && !empty($search)) {
-                $query->where('title', 'like', "%$search%");
-            }
+            $whereParams = $this->inputValidation->validate([
+                'search' => [
+                    'column' => 'title',
+                    'value' => $input['search'] ?? false,
+                ],
+                'original' => [
+                    'column' => 'is_original',
+                    'value' => $input['is_original'] ?? false,
+                ],
+                'subject' => [
+                    'column' => 'identifier',
+                    'value' => $input['subject'] ?? false,
+                ],
+            ]);
 
-            if ($original !== false && (0 === $original || 1 === $original)) {
-                $query->where('is_original', $original);
-            }
-
-            if ($subject !== false && is_numeric($subject)) {
-                $query->where('identifier', $subject);
+            foreach ($whereParams as $param) {
+                $query->where($param['column'], $param['operator'], $param['value']);
             }
 
             $results = $query->paginate($perPage);
-            $jsonResults = json_decode($results->toJson(), true);
-            $data = $jsonResults['data'];
 
             $status = 200;
             $output = [
@@ -68,7 +75,8 @@ final class SearchController extends Controller
                     'totalResults' => $results->total(),
                     'totalPages' => $results->lastPage(),
                     'currentPage' => $results->currentPage(),
-                    'results' => $data,
+                    'nextPageUrl' => $results->nextPageUrl(),
+                    'results' => $results->items(),
                 ],
             ];
         }

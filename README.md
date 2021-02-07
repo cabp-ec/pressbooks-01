@@ -7,9 +7,8 @@ Coding challenge for Pressbooks, authored by Carlos Bucheli.
 > I like to keep my codebase neat and clean, thus, I usually remove
 > unnecessary comments and not-used classes and/or components.
 > In this case, I'm using one and only one endpoint to return a list
-> of items (i.e. books), therefore, not used stuff like the console
-> commands kernel and service providers are simply not included
-> in this repo.
+> of items (i.e. books), therefore, not used stuff is simply not included
+> in this repo, unless they become necessary.
 
 ### Implementation Requirements
 

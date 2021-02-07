@@ -66,7 +66,11 @@ class Controller extends BaseController
         $output['status'] = $status;
         $output['message'] = env(self::HTTP_MESSAGE_SERVER_ERROR, 'Ups...');
         $output['data'] = [
-            'exception' => $exception->getMessage(),
+            'exception' => [
+                'file' => $exception->getFile(),
+                'line' => $exception->getLine(),
+                'message' => $exception->getMessage(),
+            ],
         ];
 
         $this->exceptionHandler->report($exception);
