@@ -7,8 +7,9 @@ Coding challenge for Pressbooks, authored by Carlos Bucheli.
 > I like to keep my codebase neat and clean, thus, I usually remove
 > unnecessary comments and not-used classes and/or components.
 > In this case, I'm using one and only one endpoint to return a list
-> of items (i.e. books), therefore, not used stuff is simply not included
-> in this repo, unless they become necessary.
+> of items (i.e. books), therefore, not used stuff like the console
+> commands kernel and service providers are simply not included
+> in this repo.
 
 ### Implementation Requirements
 
@@ -45,10 +46,65 @@ Then restart your webserver, using `Services` on Windows, the console command ac
 sudo apachectl restart
 ```
 
-### To Do's
+### Development Environment
 
-The following items are some improvements that need to be completed (during the next hours):
+The local development environment is set in the `.env` file, which is NOT included in this repository, you'll find a `.env.example` file. Please create a copy of it and rename it to `.env`.
 
-* Reduce the amount of if statements in the SearchController
-* Pass JSON data via Behat/PHPUnit
-* Create migrations
+### Database
+
+The database name is `pressbooks`, you can use any name you want, in that case you'll need to set the new name in the `.env` file. The important entries you need to consider are the name of the database, the connection type, port and credentials:
+
+```sh
+DB_CONNECTION=mysql
+DB_HOST=localhost
+DB_PORT=3306
+DB_DATABASE=pressbooks
+DB_USERNAME=yourDbUser
+DB_PASSWORD=yourDbPass
+```
+
+### Database Migrations
+
+In order to create the database you'll need to run a few migrations, entering the following commands in your favorite terminal:
+
+Go to the project directory:
+```sh
+$ cd /var/www/pressbooks/
+```
+
+Run migrations:
+```sh
+$ php artisan migrate
+```
+
+The last command will create 3 tables: `subject`, `language` and `book`. Next you can use the `` file to insert data in the recently created database, the easiest way to do so is by importing the file directly using your terminal:
+
+Go to the `mock data` directory:
+```sh
+$ cd /var/www/pressbooks/test/mock_data
+```
+
+Import the `books.sql` file:
+```sh
+$ mysql -u username -p pressbooks < books.sql
+```
+
+### Test Environment
+
+For testing, you'll need to use the `test.env` file. it's a copy of the `.env.example` file, in it you can customize it according to your needs. For this challenge I'm using [Behat](https://docs.behat.org/en/latest/), test cases are defined in the `behat.yml` file, features can be found in the `test/features` directory, while test implementations in the `test/tests` directory. In order to run test suites open your favorite Terminal and run these commands:
+
+Go to the project directory:
+```sh
+$ cd /var/www/pressbooks/
+```
+
+Tu run ALL test suites:
+```sh
+$ vendor/bin/behat
+```
+
+Tu run specific suites:
+```sh
+$ vendor/bin/behat --suite=welcome
+$ vendor/bin/behat --suite=search
+```
