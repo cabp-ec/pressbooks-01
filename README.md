@@ -108,3 +108,27 @@ Tu run specific suites:
 $ vendor/bin/behat --suite=welcome
 $ vendor/bin/behat --suite=search
 ```
+
+### HTTP Request
+
+You can run a GET request to the previously described virtual host (i.e. `http://pressbooks.local/search`) using the following parameters, all optional:
+
+Get request to the :
+```sh
+{
+	"per_page": 1,
+	"search": "something",
+	"is_original": 1,
+	"subject": 2
+}
+```
+
+### Other Pages
+
+If you want to display results using pages other than `1` just add `?page=N` at the end of the URL, like this:
+
+
+Display results for page 3
+```sh
+http://pressbooks.local/search?page=3
+```
